@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 class Material(models.Model):
 
+
     MATERIAL_TYPE = [
         ('theory', 'Theoretical material'),
         ('practice', 'Practical'),

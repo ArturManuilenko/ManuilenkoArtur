@@ -28,7 +28,7 @@ def material_details(request, year, month, day, slug):
 def share_material(request, material_id):
     material = get_object_or_404(models.Material,
                                  id=material_id)
-
+    sent = False
     if request.method == 'POST':
         form = forms.EmailMaterialForm(request.POST)
         if form.is_valid():  # делаем проверку на все поля/ значения попадают в cd
@@ -54,9 +54,10 @@ def share_material(request, material_id):
                       body,
                       'supersiteadmin@mysite.com',
                       [cd['to_email'], ])
+            sent = True
     else:
         form = forms.EmailMaterialForm()
 
     return render(request,
                   'materials/share.html',
-                  {'material': material, 'form': form})
+                  {'material': material, 'form': form,'sent': sent})

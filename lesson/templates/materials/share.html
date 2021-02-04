@@ -3,12 +3,16 @@
 {% block title %} Share material {% endblock %}
 
 {% block content %}
-    <h1>Share {{material.title}} via email. </h1>
-    <form action="." method="post">
-    {{ form.as_p }}
-    {% csrf_token %}
-     <input type="submit" value="Send!!!">
+    {% if sent %}
+        {{material.title}} has been sent.<a href="{% url 'lesson:all_materials' %}">ALL materials</a>
+    {% else %}
+        <h1>Share {{material.title}} via email. </h1>
+        <form action="." method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Send!!!">
     </form>
 
     <a href="{% url 'lesson:all_materials' %}">ALL materials</a>
+    {% endif %}
 {% endblock %}
